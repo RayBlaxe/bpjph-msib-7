@@ -1,0 +1,10 @@
+[
+    {
+        "path": "/search/[id]/",
+        "matchPath": "/search/:id"
+    },
+    {
+        "path": "/sertifikat/[id]/",
+        "matchPath": "/sertifikat/:id"
+    }
+]
