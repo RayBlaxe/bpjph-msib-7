@@ -2,8 +2,6 @@ import React from "react";
 import _ from "lodash";
 
 const Table = ({ options = [], data = [], className }) => {
-
-
   if (!options || !data) return null;
   if (data.length === 0) return null;
   return (
