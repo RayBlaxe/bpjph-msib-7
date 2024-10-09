@@ -1,0 +1,48 @@
+{
+	"info": {
+		"_postman_id": "a4ff9168-3090-4b62-bd5c-a66cbd874275",
+		"name": "API CERTIFICATE RSHLN",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "6659476",
+		"_collection_link": "https://rizqi-team.postman.co/workspace/S-I-H-A-L-A-L~d7d1c8ea-3cff-4191-9883-78c351f1d093/collection/6659476-a4ff9168-3090-4b62-bd5c-a66cbd874275?action=share&source=collection_link&creator=6659476"
+	},
+	"item": [
+		{
+			"name": "Inquiry Certificate",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://gateway.halal.go.id/v1/shln/inquirycertificate?pagination[page]=1&pagination[perPage]=10&filter[ProductName]=",
+					"protocol": "https",
+					"host": [
+						"gateway",
+						"halal",
+						"go",
+						"id"
+					],
+					"path": [
+						"v1",
+						"shln",
+						"inquirycertificate"
+					],
+					"query": [
+						{
+							"key": "pagination[page]",
+							"value": "1"
+						},
+						{
+							"key": "pagination[perPage]",
+							"value": "10"
+						},
+						{
+							"key": "filter[ProductName]",
+							"value": ""
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
