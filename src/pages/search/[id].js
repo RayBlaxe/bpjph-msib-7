@@ -86,6 +86,13 @@ const Component = ({ type, ...props }) => {
           { label: "Nomor Sertifikat", key: "sertifikat.no_sert" },
           { label: "Tanggal Terbit", key: "sertifikat.tgl_sert" },
         ];
+      case "produk_halal_ln":
+        return [
+          { label: "Nama Produk", key: "ProductName" },
+          { label: "Importer", key: "Company.CompanyName" },
+          { label: "Nomor Sertifikat", key: "Certificate.CertificateNumber" },
+          { label: "Tanggal Terbit", key: "Certificate.IssuedDate" },
+        ];
       case "data_lph":
         return [
           { label: "Nama Lembaga", key: "nama_lph" },
