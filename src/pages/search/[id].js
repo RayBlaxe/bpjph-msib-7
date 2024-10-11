@@ -54,12 +54,20 @@ const Component = ({ type, ...props }) => {
     refetch,
     isError,
   } = useQuery({
-    queryKey: "sertifikat",
+    queryKey: [type, props.location.search], // Use type and search as queryKey
     queryFn: async () => {
       let value = props?.location?.search;
       value ||= `?page=1`;
       try {
-        const url = `${process.env.API_URL}/api/search/${type}${value}&size=${sizePerPage}`;
+        // Check if the search type is 'produk_halal_ln' and use the correct endpoint
+        let url;
+        if (type === "produk_halal_ln") {
+          url = `https://gateway.halal.go.id/v1/shln/inquirycertificate?pagination[page]=1&filter[ProductName]=milk&pagination[perPage]=20`;
+          console.log(url);
+        } else {
+          url = `${process.env.API_URL}/api/search/${type}${value}&size=${sizePerPage}`;
+          console.log(url);
+        }
         const response = await fetch(url);
         const jsonResponse = await response.json();
         if (jsonResponse.statusCode !== 200) {
