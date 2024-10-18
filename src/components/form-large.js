@@ -398,7 +398,7 @@ const SearchFormLarge = ({ type }) => {
               searchType === "produk_halal_ln"
                 ? "text-teal-500"
                 : "text-gray-400"
-            }`}
+            }`}keban
             onClick={() => setSearchType("produk_halal_ln")}
             style={{ backgroundColor: "transparent", fontSize: "17px" }}
           ><button
