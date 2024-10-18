@@ -10,8 +10,6 @@ import { FormattedMessage, useIntl } from "react-intl";
 const SearchFormLarge = ({ type }) => {
   const [searchType, setSearchType] = useState(type || "sertifikat");
   const location = useLocation();
-  const [searchType, setSearchType] = useState(type || "sertifikat");
-  const location = useLocation();
   const intl = useIntl();
 
   useEffect(() => {
