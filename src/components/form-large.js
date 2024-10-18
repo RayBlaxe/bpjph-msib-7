@@ -10,6 +10,8 @@ import { FormattedMessage, useIntl } from "react-intl";
 const SearchFormLarge = ({ type }) => {
   const [searchType, setSearchType] = useState(type || "sertifikat");
   const location = useLocation();
+  const [searchType, setSearchType] = useState(type || "sertifikat");
+  const location = useLocation();
   const intl = useIntl();
 
   useEffect(() => {
@@ -19,7 +21,6 @@ const SearchFormLarge = ({ type }) => {
     }
   }, [location]);
 
-  // Define fields based on searchType
   const fields = useMemo(() => {
     switch (searchType) {
       case "sertifikat":

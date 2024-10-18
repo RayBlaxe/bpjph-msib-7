@@ -1,0 +1,65 @@
+{
+	"info": {
+		"_postman_id": "25fc2e85-fbf0-45fa-a3e1-4b3a75d7f827",
+		"name": "SERT",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "6659476",
+		"_collection_link": "https://rizqi-team.postman.co/workspace/S-I-H-A-L-A-L~d7d1c8ea-3cff-4191-9883-78c351f1d093/collection/6659476-25fc2e85-fbf0-45fa-a3e1-4b3a75d7f827?action=share&source=collection_link&creator=6659476"
+	},
+	"item": [
+		{
+			"name": "GET SERTIFIKAT",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": ".eyJzdWIiOiI1NTE4MzkxNi00OWY4LTQwYzYtOTY2Zi0wNDJhZDg5YTEyMTAiLCJyb2xlIjoibG5zdyIsImlhdCI6MTY4NDc0NDExM30.",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "https://dev-api.halal.go.id/v1/sertifikat?page=1&size=100&nama_produk=beer",
+					
+					"protocol": "https",
+					"host": [
+						"dev-api",
+						"halal",
+						"go",
+						"id"
+					],
+					"path": [
+						"v1",
+						"sertifikat"
+					],
+					"query": [
+						{
+							"key": "page",
+							"value": "1"
+						},
+						{
+							"key": "size",
+							"value": "100"
+						},
+						{
+							"key": "nama_pelaku_usaha",
+							"value": "INDOFOOD",
+							"disabled": true
+						},
+						{
+							"key": "no_sertifikat",
+							"value": "ID00310012915161023",
+							"disabled": true
+						},
+						{
+							"key": "nama_produk",
+							"value": "beer"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
