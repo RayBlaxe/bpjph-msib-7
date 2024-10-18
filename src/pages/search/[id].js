@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo } from "react";
+import React, { useEffect, useMemo, useState} from "react";
 import Layout from "../../components/layout";
 import Seo from "../../components/seo";
 import { navigate } from "gatsby";
@@ -29,23 +29,9 @@ const SearchCertificationPage = (props) => {
   );
 };
 
-const ResultText = ({ isFetching, page, total }) => {
-  const stop = Number(page) * sizePerPage;
-  const start = Number(page) * sizePerPage + 1 - sizePerPage;
-  if (isFetching) return <div />;
-  if (total === 0) return null;
-  return (
-    <div className="my-4">
-      <p className="text-base font-semibold">
-        Hasil {start} hingga {sizePerPage < total ? stop : total} dari {total}
-      </p>
-      <div className="my-2 w-20 border-b-4 border-green" />
-    </div>
-  );
-};
-
 const Component = ({ type, ...props }) => {
-  const intl = useIntl();
+  const [searchParams, setSearchParams] = useState(new URLSearchParams(props.location.search));
+  const [currentPage, setCurrentPage] = useState(parseInt(searchParams.get('page') || '1', 10));
 
   const {
     data: response,
@@ -54,19 +40,45 @@ const Component = ({ type, ...props }) => {
     refetch,
     isError,
   } = useQuery({
-    queryKey: "sertifikat",
+    queryKey: [type, searchParams.toString()],
     queryFn: async () => {
-      let value = props?.location?.search;
-      value ||= `?page=1`;
       try {
-        const url = `${process.env.API_URL}/api/search/${type}${value}&size=${sizePerPage}`;
+        let url;
+        if (type === "produk_halal_ln") {
+          url = `https://gateway.halal.go.id/v1/shln/inquirycertificate?pagination[page]=${currentPage}&pagination[perPage]=${sizePerPage}&filter[ProductName]=${searchParams.get('nama_produk') || ''}&filter[ImporterName]=${searchParams.get('nama_importer') || ''}&filter[CertificateNumber]=${searchParams.get('no_registrasi') || ''}`;
+        } else {
+          // Ensure passing the correct parameters
+          const params = new URLSearchParams(searchParams);
+          params.set('page', currentPage.toString());
+          params.set('size', sizePerPage.toString());
+          
+          switch(type) {
+            case "data_lph":
+              params.set('nama_lph', searchParams.get('nama_lph') || '');
+              break;
+            case "data_lp3h":
+              params.set('nama_lembaga', searchParams.get('nama_lembaga') || '');
+              break;
+            case "data_p3h":
+              params.set('nama', searchParams.get('nama') || '');
+              break;
+            case "data_lembaga_pelatihan":
+              params.set('nama_lembaga', searchParams.get('nama_lembaga') || '');
+              break;
+          }
+          
+          url = `${process.env.API_URL}/api/search/${type}?${params.toString()}`;
+        }
+        console.log('Fetching URL:', url);
+        
         const response = await fetch(url);
         const jsonResponse = await response.json();
-        if (jsonResponse.statusCode !== 200) {
-          throw new Error(jsonResponse.statusCode);
-        }
+        
+        console.log('API Response:', jsonResponse);
+
         return jsonResponse;
       } catch (error) {
+        console.error('Error fetching data:', error);
         throw error;
       }
     },
@@ -74,8 +86,27 @@ const Component = ({ type, ...props }) => {
   });
 
   useEffect(() => {
+    const params = new URLSearchParams(props.location.search);
+    setSearchParams(params);
+    setCurrentPage(parseInt(params.get('page') || '1', 10));
+  }, [props.location.search]);
+
+  useEffect(() => {
     refetch();
-  }, [props.location.search, refetch]);
+  }, [searchParams, refetch]);
+
+  const changePage = (value) => {
+    if (isFetching) return;
+    
+    const newPage = currentPage + value;
+    setCurrentPage(newPage);
+    
+    const newParams = new URLSearchParams(searchParams.toString());
+    newParams.set("page", newPage.toString());
+    setSearchParams(newParams);
+    
+    navigate(`/search/${type}?${newParams.toString()}`, { replace: true });
+  };
 
   const options = useMemo(() => {
     switch (type) {
@@ -85,6 +116,14 @@ const Component = ({ type, ...props }) => {
           { label: "Produsen", key: "pelaku_usaha.nama_pu" },
           { label: "Nomor Sertifikat", key: "sertifikat.no_sert" },
           { label: "Tanggal Terbit", key: "sertifikat.tgl_sert" },
+        ];
+      case "produk_halal_ln":
+        return [
+          { label: "Nama Produk / Name of Product", key: "ProductName" },   
+          { label: "Importer", key: "Company.ImporterName" },
+          { label: "ID REG. NO.", key: "Certificate.CertificateNumber" },
+          { label: "EXP. DATE", key: "Certificate.ExpDate" },
+          { label: "MRA EXP. DATE", key: "LHLN.ExpMraDate" },
         ];
       case "data_lph":
         return [
@@ -166,26 +205,51 @@ const Component = ({ type, ...props }) => {
     }
   }, [type]);
 
-  const changePage = (value) => {
-    if (isFetching || !response?.data) return;
-    let search = props?.location?.search;
-    let params = new URLSearchParams(search);
-    let page = Number(params.get("page") || 1);
-    params.set("page", page + value);
-    navigate(`/search/${type}?${params.toString()}`, {
-      replace: true,
-    });
+  const ResultText = ({ isFetching, currentPage, total }) => {
+    if (isFetching || !total) return <div />;
+  
+    const start = (currentPage - 1) * sizePerPage + 1;
+    const end = Math.min(currentPage * sizePerPage, total);
+  
+    return (
+      <div className="my-4">
+        <p className="text-base font-semibold">
+          Hasil {start} hingga {end} dari {total}
+        </p>
+        <div className="my-2 w-20 border-b-4 border-green" />
+      </div>
+    );
   };
 
-  const showPrev = useMemo(() => {
-    return !isFetching && response?.data?.current_page > 1;
-  }, [isFetching, response?.data]);
+  const getData = () => {
+    if (!response) {
+      console.log('No response data');
+      return { totalItems: 0, totalPages: 0, currentPage: 1, tableData: [] };
+    }
+    if (type === "produk_halal_ln") {
+      const data = response.GETS_INQUIRYCERTIFICATE;
+      return {
+        totalItems: data.totalData,
+        totalPages: data.totalPage,
+        currentPage: data.currentPage,
+        tableData: data.data || []
+      };
+    } else {
+      console.log('Processing data for type:', type, response);
+      return {
+        totalItems: response.data?.total_items || 0,
+        totalPages: response.data?.total_pages || 0,
+        currentPage: response.data?.current_page || 1,
+        tableData: response.data?.datas || []
+      };
+    }
+  };
 
-  const showNext = useMemo(() => {
-    return (
-      !isFetching && response?.data?.current_page < response?.data?.total_pages
-    );
-  }, [isFetching, response?.data]);
+  const { totalItems, totalPages, currentPage: responsePage, tableData } = getData();
+  console.log('Processed data:', { totalItems, totalPages, responsePage, tableDataLength: tableData.length }); // Debugging
+
+  const showPrev = !isFetching && currentPage > 1;
+  const showNext = !isFetching && currentPage < totalPages;
 
   if (isError) {
     return null;
@@ -194,15 +258,28 @@ const Component = ({ type, ...props }) => {
   return (
     <React.Fragment>
       <div className="container">
+        {/* debugging info */}
+        {/* <pre style={{backgroundColor: '#f0f0f0', padding: '10px', fontSize: '12px'}}>
+          Debug Info:
+          isFetching: {isFetching.toString()}
+          isError: {isError.toString()}
+          totalItems: {totalItems}
+          currentPage: {currentPage}
+          tableData length: {tableData.length}
+        </pre> */}
         <ResultText
           isFetching={isFetching}
-          total={response?.data?.total_items}
-          page={response?.data?.current_page}
+          total={totalItems}
+          currentPage={currentPage}
         />
         {isFetching ? (
           <CircleLoading />
         ) : (
-          <Table options={options} data={response?.data?.datas} />
+          tableData.length > 0 ? (
+            <Table options={options} data={tableData} />
+          ) : (
+            <p>Tidak ada hasil yang cocok.</p>
+          )
         )}
         <div className="my-5 flex flex-col items-center justify-between">
           <div className="xs:mt-0 mt-2 inline-flex">
