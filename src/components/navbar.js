@@ -54,8 +54,8 @@ const Navbar = ({ locales, pageContext, ...props }) => {
         <div className="flex flex-row items-center justify-between p-4">
           <a className="flex flex-row" href="/">
             <StaticImage
-              src="../assets/BPJPH_logo.png"
-              height={40}
+              src="../assets/logo_halal.PNG"
+              height={52}
               layout="fixed"
               placeholder="blurred"
               alt="Logo BPJPH"
