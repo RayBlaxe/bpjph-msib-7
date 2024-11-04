@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useMemo } from "react";
 import { navigate } from "gatsby";
-import { useLocation } from "@reach/router"; 
+import { useLocation } from "@reach/router";
 import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
 import Button from "./button";
@@ -97,7 +97,10 @@ const SearchFormLarge = ({ type }) => {
   // Define validation schemas
   const FormSchema = Yup.object().shape(
     Object.fromEntries(
-      fields.map(field => [field.id, Yup.string().min(3, 'Minimal 3 karakter')])
+      fields.map((field) => [
+        field.id,
+        Yup.string().min(3, "Minimal 3 karakter"),
+      ])
     )
   );
 
@@ -120,10 +123,12 @@ const SearchFormLarge = ({ type }) => {
 
   // Function to handle form submission
   const getResult = (values, { setSubmitting, setErrors }) => {
-    const isValid = Object.values(values).some(value => value.length >= 3);
-    
+    const isValid = Object.values(values).some((value) => value.length >= 3);
+
     if (!isValid) {
-      setErrors({ form: "Minimal satu field harus diisi dengan 3 karakter atau lebih" });
+      setErrors({
+        form: "Minimal satu field harus diisi dengan 3 karakter atau lebih",
+      });
       setSubmitting(false);
       return;
     }
@@ -137,7 +142,8 @@ const SearchFormLarge = ({ type }) => {
   if (!fields || fields.length === 0) return null;
 
   const isSingleField = fields.length === 1;
-  const showTypeButtons = searchType === "sertifikat" || searchType === "produk_halal_ln";
+  const showTypeButtons =
+    searchType === "sertifikat" || searchType === "produk_halal_ln";
 
   return (
     <>
@@ -164,7 +170,9 @@ const SearchFormLarge = ({ type }) => {
           </button>
           <button
             className={`font-semibold ${
-              searchType === "produk_halal_ln" ? "text-teal-500" : "text-gray-400"
+              searchType === "produk_halal_ln"
+                ? "text-teal-500"
+                : "text-gray-400"
             }`}
             onClick={() => setSearchType("produk_halal_ln")}
             style={{ backgroundColor: "transparent", fontSize: "17px" }}
@@ -185,10 +193,23 @@ const SearchFormLarge = ({ type }) => {
       >
         {({ errors, touched, isSubmitting }) => (
           <Form className="mb-4">
-            <div className={`container mx-auto flex ${isSingleField ? 'justify-start' : 'justify-center'}`}>
-              <div className={`flex ${isSingleField ? 'w-full max-w-xl' : 'w-full max-w-4xl'} flex-col md:flex-row md:gap-1`}>
+            <div
+              className={`container mx-auto flex ${
+                isSingleField ? "justify-start" : "justify-center"
+              }`}
+            >
+              <div
+                className={`flex ${
+                  isSingleField ? "w-full max-w-xl" : "w-full max-w-4xl"
+                } flex-col md:flex-row md:gap-1`}
+              >
                 {fields.map((item, index) => (
-                  <div key={`field-${index}`} className={`flex flex-col mb-2 md:mb-0 ${isSingleField ? 'md:w-3/4' : 'md:flex-grow'}`}>
+                  <div
+                    key={`field-${index}`}
+                    className={`mb-2 flex flex-col md:mb-0 ${
+                      isSingleField ? "md:w-3/4" : "md:flex-grow"
+                    }`}
+                  >
                     <div className="relative">
                       <Field
                         as={TextInput}
@@ -202,13 +223,17 @@ const SearchFormLarge = ({ type }) => {
                         })}
                       />
                       {errors[item.id] && touched[item.id] && (
-                        <div className="absolute left-0 -bottom-5 text-red-500 text-xs">{errors[item.id]}</div>
+                        <div className="absolute left-0 -bottom-5 text-xs text-red-500">
+                          {errors[item.id]}
+                        </div>
                       )}
                     </div>
                   </div>
                 ))}
                 <Button
-                  className={`mt-2 bg-purple md:mt-0 ${isSingleField ? 'md:w-1/4' : 'md:w-24'}`}
+                  className={`mt-2 bg-purple md:mt-0 ${
+                    isSingleField ? "md:w-1/4" : "md:w-24"
+                  }`}
                   type="submit"
                   disabled={isSubmitting}
                 >
@@ -217,7 +242,9 @@ const SearchFormLarge = ({ type }) => {
               </div>
             </div>
             {errors.form && (
-              <div className="text-red-500 text-sm mt-2 text-center">{errors.form}</div>
+              <div className="mt-2 text-center text-sm text-red-500">
+                {errors.form}
+              </div>
             )}
           </Form>
         )}

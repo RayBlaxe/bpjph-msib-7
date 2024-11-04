@@ -31,13 +31,13 @@ const Footer = (props) => {
     <footer className="bg-purple text-xs text-white">
       <div className="container my-10 grid gap-10 sm:grid-cols-1 md:grid-cols-7">
         <div className="col-span-1 flex flex-col justify-between md:col-span-3">
-          <StaticImage
+          {/* <StaticImage
             alt="logo bpjph"
             src={"../assets/BPJPH_logo.png"}
             placeholder="blurred"
             height={64}
             layout="fixed"
-          />
+          /> */}
           <div className="mt-4 mb-8 flex flex-row">
             <StaticImage
               alt="logo halal"
