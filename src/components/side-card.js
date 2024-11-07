@@ -60,6 +60,7 @@ const SideCard = (props) => {
           ))}
         </div>
       </div>
+
       <Infographics data={infographics} previewImage={previewImage} />
       <ImgsViewer
         imgs={imageState.image}
@@ -75,6 +76,23 @@ const SideCard = (props) => {
           },
         }}
       />
+
+      <div className="mt-6 w-full">
+        <h1 className="text-md mb-3 border-b-2 border-green font-semibold text-fontPrimary">
+          <FormattedMessage id="viewers" defaultMessage={"Pengunjung"} />
+        </h1>
+        {/* Tambahkan Flag Counter di sini */}
+        <div className="flex justify-center">
+          <a href="https://info.flagcounter.com/OqFW" target="_blank" rel="noopener noreferrer">
+            <img
+              src="https://s11.flagcounter.com/countxl/OqFW/bg_FFFFFF/txt_670075/border_670075/columns_2/maxflags_15/viewers_3/labels_1/pageviews_1/flags_0/percent_0/"
+              alt="Flag Counter"
+              border="0"
+            />
+          </a>
+        </div>
+      </div>
+      
     </div>
   );
 };

@@ -46,7 +46,7 @@ const Footer = (props) => {
               height={48}
               layout="fixed"
             />
-            <StaticImage
+            {/* <StaticImage
               alt="logo pusaka"
               src={"../assets/pusaka.png"}
               placeholder="blurred"
@@ -69,7 +69,7 @@ const Footer = (props) => {
               height={48}
               layout="fixed"
               className="ml-2"
-            />
+            /> */}
           </div>
           <p className="mt-1">{strapiAddress.address}</p>
         </div>

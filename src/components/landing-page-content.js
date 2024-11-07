@@ -4,6 +4,7 @@ import React, { useMemo } from "react";
 import ArticleCardHorizontal from "./article-card-horizontal";
 import { FormattedMessage } from "react-intl";
 import { HiOutlineArrowSmRight } from "react-icons/hi";
+import AdditionalSection from "./AdditionalSection";
 
 const CardGallery = ({ locale, article, isHeadline, showPublishedDate }) => {
   const base = locale === "id" ? "" : `/${locale}`;
@@ -163,6 +164,7 @@ const LandingPageContent = (props) => {
           </div>
         );
       })}
+      <AdditionalSection/>
     </div>
   );
 };

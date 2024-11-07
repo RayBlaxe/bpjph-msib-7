@@ -5,16 +5,12 @@ import Seo from "../components/seo";
 import SectionOne from "../sections/one";
 import LandingPageContent from "../components/landing-page-content";
 import SideCard from "../components/side-card";
-import AdditionalSection from "../components/AdditionalSection";
-import CertificateTable from "../pages/example/test";
 
 const IndexPage = (props) => {
   const { strapiGlobal, allStrapiArticle, allStrapiInfographic } = props.data;
-
   return (
     <Layout {...props} {...props?.pageContext}>
       <Seo seo={{ metaTitle: strapiGlobal.siteName }} />
-      {/* <CertificateTable /> */}
       <main>
         <SectionOne {...props} />
         <div className="container grid grid-cols-1 gap-0 md:grid-cols-3 md:gap-6">
@@ -29,8 +25,6 @@ const IndexPage = (props) => {
             />
           </div>
         </div>
-        {/* Pass the image data to AdditionalSection */}
-        <AdditionalSection />
       </main>
     </Layout>
   );
@@ -42,8 +36,6 @@ export const query = graphql`
       siteName
       siteDescription
     }
-
-    # The existing queries
     banner: allStrapiBanner(filter: { locale: { eq: $locale } }) {
       nodes {
         image {
@@ -135,4 +127,5 @@ export const query = graphql`
     }
   }
 `;
+
 export default IndexPage;
