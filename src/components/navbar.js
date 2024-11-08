@@ -108,8 +108,8 @@ const Navbar = ({ locales, pageContext, ...props }) => {
           })}
 
           <div
-            key={'jurnal'}
-            onClick={() => navigate('jurnal')}
+            key={'journal'}
+            onClick={() => navigate('/journal')}
             className="focus:shadow-outline text-md mt-2 cursor-pointer rounded-lg bg-transparent px-2 py-2 font-semibold hover:bg-white hover:text-purple focus:bg-white focus:text-purple focus:outline-none md:mt-0 md:ml-2"
             rel="noreferrer"
           >
@@ -118,7 +118,7 @@ const Navbar = ({ locales, pageContext, ...props }) => {
           
           {/* <div
             key={'e-library'}
-            onClick={() => navigate('elibrary')}
+            onClick={() => navigate('/elibrary')}
             className="focus:shadow-outline text-md mt-2 cursor-pointer rounded-lg bg-transparent px-2 py-2 font-semibold hover:bg-white hover:text-purple focus:bg-white focus:text-purple focus:outline-none md:mt-0 md:ml-2"
             rel="noreferrer"
           >
