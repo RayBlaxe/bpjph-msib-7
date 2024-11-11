@@ -10,13 +10,15 @@ const queryCache = new QueryCache();
 const queryClient = new QueryClient({ queryCache });
 
 const Layout = ({ children, ...props }) => {
-  const {
-    pageContext: { locale, defaultLocale },
-  } = props;
+  // Ensure pageContext exists, otherwise fallback to default values
+  const { pageContext } = props;
+  const locale = pageContext?.locale || 'en'; // Default to 'en' if locale is not available
+  const defaultLocale = pageContext?.defaultLocale || 'en'; // Default to 'en' if defaultLocale is not available
 
+  // Determine the correct messages based on the locale
   const messages = useMemo(() => {
     const language = { en, id };
-    return language[locale];
+    return language[locale] || language['en']; // Fallback to English if locale is not found
   }, [locale]);
 
   return (

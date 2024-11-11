@@ -6,8 +6,11 @@ import PrevButton from "../../components/prev-button";
 import NextButton from "../../components/next-button";
 import { useQuery } from "react-query";
 import { useEffect, useState } from "react";
+import { FiSearch } from "react-icons/fi";
 
 export default function Sertifikat(props) {
+
+    <br/> 
     const seo = {
         metaTitle: "Portal Jurnal",
         metaDescription: "Cari dan temukan jurnal di Portal Jurnal Halal",
@@ -77,13 +80,16 @@ const Component = ({ type, ...props }) => {
     return (
         <div className="portal-jurnal-container">
             {/* Bagian Header */}
-            <div className="header-section">
-                <h1 className="portal-title">Portal Jurnal</h1>
-                <div className="search-bar">
-                    <input type="text" placeholder="Cari Jurnal ..." />
-                    <button className="search-button">🔍</button>
-                </div>
-            </div>
+           
+<div className="header-section">
+  <h1 className="portal-title">Portal Jurnal</h1>
+  <div className="search-bar">
+    <input type="text" placeholder="Cari Jurnal ..." />
+    <button className="search-button">
+      <FiSearch style={{ color: "#5B2C8A" }} />
+    </button>
+  </div>
+</div>
 
             {/* Bagian Daftar Jurnal */}
             <div className="jurnal-list-section">

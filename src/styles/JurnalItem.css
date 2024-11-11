@@ -1,33 +1,52 @@
 /* Portal Jurnal Container */
 .portal-jurnal-container {
-  padding: 20px;
+  width: 100%;
+  padding: 0px;
   background-color: #f3f3f3;
 }
 
 /* Header Section */
 .header-section {
+  width: 99vw; /* Mengambil hampir seluruh lebar viewport */
+  height: 220px; /* Tinggi header */
   text-align: center;
-  background-image: url('../assets/bg_header_journal.svg'); /* Sesuaikan path jika perlu */
-  background-size: 100; /* Agar gambar memenuhi area header */
-  background-position: center; /* Menyelaraskan gambar di tengah */
-  color: #3DC3A3;
-  padding: 30px 0;
-  position: relative;
+  background-image: url('../assets/header.png'); /* Sesuaikan path */
+  background-size: cover; /* Menutupi seluruh area dengan proporsi yang benar */
+  background-position: center; /* Memusatkan gambar */
+  background-repeat: no-repeat; /* Menghindari pengulangan gambar */
+  margin: 0;
+  padding: 40px 20px; /* Mengatur padding */
+  display: flex; /* Menggunakan flexbox untuk tata letak */
+  flex-direction: column; /* Menjaga portal-title di tengah */
+  align-items: center; /* Memusatkan portal-title secara horizontal */
+  margin-bottom: 20px; /* Memberi jarak di bawah header */
+  margin-top: 20px;
 }
 
-/* Judul Portal */
-.portal-title {
-  font-size: 2.5em;
-  font-weight: bold;
-  margin: 0;
+.header-action {
+  display: flex; /* Menyusun tombol dan pencarian dalam satu baris */
+  align-items: center; /* Menjaga elemen tetap sejajar secara vertikal */
+  gap: 10px; /* Menambahkan jarak antar elemen */
 }
+
+.portal-title {
+  font-size: 32px;
+  font-weight: bold;
+  color: #3DC3A3;
+  margin-bottom: 20px; /* Memberikan jarak di bawah title */
+}
+
+
+
 
 /* Search Bar */
 .search-bar {
-  margin-top: 20px;
+  margin-top: 10px;
   display: flex;
   justify-content: center;
-  gap: 10px;
+  align-items: center;
+  position: relative;
+  gap: 8px;
 }
 
 .search-bar input {
@@ -38,7 +57,7 @@
 }
 
 .search-button {
-  padding: 10px 15px;
+  padding: 15px 15px;
   background-color: white;
   border: none;
   border-radius: 20px;
@@ -51,10 +70,10 @@
   right: 20px;
   top: 20px; /* Jarak tombol dari bagian atas header */
   padding: 5px 25px;
-  background-color: #7b3b9b ;
+  background-color: #670075 ;
   color: white;
   border: none;
-  border-radius: 10px;
+  border-radius: 5px;
   cursor: pointer;
 }
 
@@ -68,6 +87,12 @@
 /* Daftar Jurnal Section */
 .jurnal-list-section {
   margin-top: 5px;
+  width: 90%; /* Mengatur lebar container menjadi 90% dari layar */
+  max-width: 1200px; /* Membatasi lebar maksimal agar tidak terlalu besar di layar besar */
+  margin-left: auto; /* Memusatkan container secara horizontal */
+  margin-right: auto; /* Memusatkan container secara horizontal */
+  padding: 10px; /* Menambahkan sedikit padding */
+  box-sizing: border-box; /* Memastikan padding tidak mempengaruhi ukuran elemen */
 }
 
 .daftar-jurnal-title {
@@ -117,7 +142,10 @@
   margin-bottom: 16px;
   border-radius: 8px;
   background-color: #ffffff;
+  justify-content: space-between; /* Pastikan ada ruang antara elemen */
+  align-items: flex-start; /* Menyelaraskan elemen secara vertikal */
 }
+
 
 .jurnal-image img {
   width: 100px;
@@ -128,8 +156,25 @@
 .jurnal-content {
   display: flex;
   flex-direction: column;
-  width: 100%;
+  gap: 8px; /* Menambahkan jarak antar elemen */
+  width: 100%; /* Memastikan konten mengisi lebar penuh */
 }
+
+.title {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 8px;
+}
+
+.meta-info {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+}
+
+/* Existing styling */
 
 .issn-subject-container {
   display: flex;
@@ -137,13 +182,16 @@
   gap: 15px;
 }
 
-.issn {
-  margin: 0;
+.issn, .subject-area, .university, .jurnal-stats span, .author {
+  display: flex; /* Aligns icon and text side by side */
+  align-items: center;
+  font-size: 0.9em;
+  color: #555;
+  gap: 6px; /* Space between icon and text */
 }
 
-.subject-area {
-  margin: 0;
-  margin-left: 20px;
+.author svg {
+  color: #34c6ac; /* Icon color for the author */
 }
 
 .jurnal-content h3 {
@@ -151,28 +199,279 @@
   margin: 0;
 }
 
-.university, .issn, .subject-area, .jurnal-stats {
+.university, .issn, .subject-area, .jurnal-stats, .author {
   font-size: 0.9em;
   color: #555;
 }
 
 .jurnal-stats {
   display: flex;
-  gap: 8px;
-  margin-top: 8px;
-  justify-content: space-between;
+  gap: 20px; /* Menambah jarak antara statistik (views dan downloads) */
   align-items: center;
+  margin-top: 6px; /* Memberikan jarak atas dari konten sebelumnya */
+  width: 100%; /* Memastikan jurnal-stats menggunakan lebar penuh */
 }
 
+
 .jurnal-link {
-  color: #7b3b9b;
+  color: #670075;
   font-weight: bold;
   text-decoration: none;
   margin-top: 8px;
-  display: inline-block;
-  margin-left: auto;
+  display: block;
+  width: 100%; /* Pastikan mengisi lebar penuh */
+  margin-left: auto; /* Mendorong ke kanan */
+  margin-right: 0;
+  text-align: right; /* Menyelaraskan teks ke kanan */
 }
 
 .jurnal-link:hover {
   text-decoration: underline;
+}
+
+/* Updated icon color styling */
+.university svg,
+.issn svg,
+.subject-area svg,
+.jurnal-stats svg {
+  color: #34c6ac; /* Updated icon color */
+}
+.contentTitleeSatu {
+  font-size: 20px; /* Adjust size if needed */
+  margin-bottom: 10px; /* Add space between heading and content */
+}
+
+.metrics-container {
+  display: flex;
+  flex-direction: column; /* Stack the items vertically */
+  gap: 10px; /* Space between views and downloads */
+}
+.views, .downloads {
+  font-size: 1.5em;
+  color: #555;
+  display: flex; /* Memastikan flexbox diterapkan pada setiap elemen */
+  align-items: center; /* Menjaga logo dan teks sejajar secara vertikal */
+  gap: 6px; /* Memberikan ruang antara ikon dan teks */
+  flex-shrink: 0; /* Menghindari elemen mengecil jika ruang terbatas */
+}
+
+
+/* JournalPage.css */
+
+.contentTitleSatu {
+  font-size: 28px; /* Ukuran font */
+  font-weight: bold; /* Menebalkan teks */
+  color: black; /* Warna teks */
+  margin-bottom: 20px; /* Jarak bawah */
+}
+
+.containerSearchSatu {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  width: 100%;
+  max-width: 600px;
+}
+
+
+
+.inputContainerSatu {
+  flex: 1;
+  position: relative;
+}
+
+.inputSatu {
+  width: 300px;  /* Anda bisa sesuaikan dengan ukuran yang diinginkan */
+  padding: 10px 20px;
+  border-radius: 20px;
+  border: 1px solid #ddd;
+  font-size: 16px;
+}
+.containerSearchSatu {
+  display: flex;  /* Menyusun elemen secara horizontal */
+  align-items: center;  /* Menjaga elemen-elemen tetap sejajar secara vertikal */
+  gap: 20px;  /* Menambahkan jarak antar elemen */
+  flex-direction: row; /* Membuat semua elemen berada dalam satu baris */
+}
+
+.buttonUnggahSatu {
+  padding: 10px 20px;
+  background-color: #fff;
+  color: #670075;
+  border: none;
+  border-radius: 20px;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 10px;
+  flex-direction: row; /* Membuat semua elemen berada dalam satu baris */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+.searchButtonSatu {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  flex-direction: row; /* Membuat semua elemen berada dalam satu baris */
+  transform: translateY(-50%);
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  color: #670075;
+  font-size: 18px;
+}
+
+
+/* Konten Jurnal */
+.containerDua {
+  display: flex;
+  gap: 20px;
+  padding: 20px;
+}
+
+.detailSatu {
+  flex: 2;
+  background: #f9f9f9;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.metaSatu {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.publisherSatu {
+  color: #3DC3A3;
+      font-weight: semi bold;
+      font-size: 19px;
+}
+.publisherrSatu {
+  color: #3DC3A3;
+      font-weight: semi bold;
+      font-size: 15px;
+}
+
+.pdfButtonSatu {
+  display: flex;
+  align-items: center;
+  background-color: #670075;
+  color: #ffffff;
+  padding: 4px 18px;
+  border: none;
+  border-radius: 4px;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+.contentTitleeSatu{
+  font-size: 17px; 
+  font-weight: bold;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.abstractSatu {
+  margin: 18px 0;
+  text-align: justify;
+}
+
+.infoSatu {
+  margin-bottom: 20px;
+}
+
+.authorLinkSatu {
+  color: #670075;
+  text-decoration: underline;
+}
+
+.authorLinkSatuu {
+  color: #3DC3A3;
+  text-decoration: underline;
+  margin-top: 12px;
+}
+
+.metrics {
+  display: flex;
+  gap: 20px;
+}
+
+.metricItem {
+  display: flex;
+  gap: 5px;
+  font-weight: bold;
+}
+
+/* Sidebar */
+/* Sidebar Styling */
+.sidebarSatu {
+  padding: 10px;
+  background-color: #f9f9f9; /* Light background */
+  border-radius: 8px;
+  margin-top: 0px;
+}
+
+.sidebarSatu .recentCardSatu {
+  border: 2px solid #670075; /* Purple border */
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 8px;
+  max-width: 350px; /* Default max width for card */
+  width: 100%; /* Allow card to grow in smaller viewports */
+  transition: transform 0.2s ease; /* Optional: add a hover effect */
+  box-sizing: border-box; /* Ensure padding does not exceed width */
+  position: relative; /* To position 'Selengkapnya' at bottom-right */
+}
+
+.sidebarSatu .recentCardSatu:hover {
+  transform: translateY(-5px); /* Optional: hover effect */
+}
+
+.sidebarSatu .recentInfoSatu h4 {
+  font-size: 16px; /* Make the title smaller */
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.sidebarSatu .tagsSatu, .sidebarSatu .subjectSatu {
+  font-size: 14px;
+  color: #777;
+  display: flex; /* Ensures both the icon and text are in a row */
+  align-items: center; /* Vertically align icon and text */
+  margin-right: 10px; /* Space between icon and text */
+}
+
+.sidebarSatu .tagsSatu {
+  margin-top: 5px; /* Add some space between lines */
+}
+
+.sidebarSatu .subjectSatu {
+  margin-top: 5px;
+}
+
+.sidebarSatu .seeMoreSatu {
+  color: #670075;
+  font-weight: bold;
+  text-decoration: none;
+  font-size: 12px; /* Make 'Selengkapnya' text smaller */
+  position: absolute; /* Position it at the bottom-right */
+  bottom: 10px;
+  right: 10px;
+}
+
+.sidebarSatu .seeMoreSatu:hover {
+  text-decoration: underline;
+}
+
+@media (min-width: 600px) {
+  .sidebarSatu .recentCardSatu {
+    max-width: 500px; /* Increase max width on larger screens */
+  }
+}
+
+@media (max-width: 600px) {
+  .sidebarSatu .recentCardSatu {
+    max-width: 100%; /* Make card take full width on smaller screens */
+  }
 }
