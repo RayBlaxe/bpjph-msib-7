@@ -77,22 +77,20 @@ const SideCard = (props) => {
         }}
       />
 
-      <div className="mt-6 w-full">
-        <h1 className="text-md mb-3 border-b-2 border-green font-semibold text-fontPrimary">
+      <div className="mt-8 w-full relative">
+        <h1 className="text-md mb-3 border-b-2 border-green font-semibold text-fontPrimary relative z-10">
           <FormattedMessage id="viewers" defaultMessage={"Pengunjung"} />
         </h1>
-        {/* Tambahkan Flag Counter di sini */}
-        <div className="flex justify-center">
-          <a href="https://info.flagcounter.com/OqFW" target="_blank" rel="noopener noreferrer">
+        <div className="-mt-8 relative z-0">
+          <a href="https://worldflagcounter.com/details/iMX" target="_blank" rel="noopener noreferrer">
             <img
-              src="https://s11.flagcounter.com/countxl/OqFW/bg_FFFFFF/txt_670075/border_670075/columns_2/maxflags_15/viewers_3/labels_1/pageviews_1/flags_0/percent_0/"
+              src="https://worldflagcounter.com/iMX/"
               alt="Flag Counter"
               border="0"
             />
           </a>
         </div>
       </div>
-      
     </div>
   );
 };
