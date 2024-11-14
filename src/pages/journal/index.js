@@ -1,7 +1,7 @@
 import * as React from "react";
 import Layout from "../../components/layout";
 import Seo from "../../components/seo";
-import JurnalItem from "../../components/JurnalItem"; // Komponen item jurnal
+import JurnalItem from "../../components/JurnalItem";
 import PrevButton from "../../components/prev-button";
 import NextButton from "../../components/next-button";
 import { useQuery } from "react-query";
@@ -10,7 +10,7 @@ import { FiSearch } from "react-icons/fi";
 
 export default function Sertifikat(props) {
 
-    <br/> 
+    <br />
     const seo = {
         metaTitle: "Portal Jurnal",
         metaDescription: "Cari dan temukan jurnal di Portal Jurnal Halal",
@@ -59,10 +59,10 @@ const Component = ({ type, ...props }) => {
 
     const ResultText = ({ isFetching, page, total }) => {
         if (isFetching || !total) return <div />;
-      
+
         const startResult = (page - 1) * pageSize + 1;
         const endResult = Math.min(page * pageSize, response?.total || 0);
-        
+
         return (
             <div className="my-4">
                 <p className="text-base font-semibold">
@@ -80,16 +80,16 @@ const Component = ({ type, ...props }) => {
     return (
         <div className="portal-jurnal-container">
             {/* Bagian Header */}
-           
-<div className="header-section">
-  <h1 className="portal-title">Portal Jurnal</h1>
-  <div className="search-bar">
-    <input type="text" placeholder="Cari Jurnal ..." />
-    <button className="search-button">
-      <FiSearch style={{ color: "#5B2C8A" }} />
-    </button>
-  </div>
-</div>
+
+            <div className="header-section">
+                <h1 className="portal-title">Portal Jurnal</h1>
+                <div className="search-bar">
+                    <input type="text" placeholder="Cari Jurnal ..." />
+                    <button className="search-button">
+                        <FiSearch style={{ color: "#5B2C8A" }} />
+                    </button>
+                </div>
+            </div>
 
             {/* Bagian Daftar Jurnal */}
             <div className="jurnal-list-section">
@@ -99,7 +99,7 @@ const Component = ({ type, ...props }) => {
                     </a>
                 </div>
                 <h2 className="daftar-jurnal-title">Daftar Jurnal</h2>
-                
+
                 {/* Menampilkan teks hasil */}
                 <ResultText isFetching={isFetching} page={page} total={response?.total} />
 
